@@ -1,0 +1,19 @@
+project_id = "mielle-lamour"
+
+[functions.availability]
+verify_jwt = false
+
+[functions.create-booking]
+verify_jwt = false
+
+[functions.manage-booking]
+verify_jwt = false
+
+[functions.contact]
+verify_jwt = false
+
+[functions.send-reminders]
+verify_jwt = false
+
+[functions.release-deposits]
+verify_jwt = false

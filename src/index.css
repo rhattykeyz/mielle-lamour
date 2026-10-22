@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pink: #f8d7e0;
+  --pink-deep: #f1b8c8;
+  --gold: #c9a24b;
+  --gold-deep: #a8832f;
+  --cream: #fff8ee;
+  --ink: #3a2b2e;
+  --ink-muted: #6b565a;
+  --white: #fffbfa;
+  --error: #9b2c3a;
+  --success: #3d6b4f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--cream);
+  font-family: Outfit, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--pink-deep);
+  color: var(--ink);
+}
+
+h1,
+h2,
+h3,
+.font-serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.script {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition;
+  background: var(--gold);
+  color: #2a1f12;
+}
+.btn-gold:hover {
+  background: var(--gold-deep);
+  color: #fff8ee;
+}
+.btn-gold:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition;
+  border: 1px solid var(--gold);
+  color: var(--ink);
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: var(--pink);
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid rgba(201, 162, 75, 0.35);
+  box-shadow: 0 12px 40px rgba(58, 43, 46, 0.06);
+}
+
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(201, 162, 75, 0.45);
+  background: var(--white);
+  color: var(--ink);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.9rem;
+}
+
+label {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  color: var(--ink-muted);
+}
