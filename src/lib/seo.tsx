@@ -42,7 +42,7 @@ export function LocalBusinessJsonLd({
     "@type": "BeautySalon",
     name: "Mielle L'Amour",
     url: site,
-    image: `${site}/og-image.svg`,
+    image: `${site}/logo.jpg`,
     address: {
       "@type": "PostalAddress",
       streetAddress: settings?.address || "[ADDRESS, AREA, ACCRA]",

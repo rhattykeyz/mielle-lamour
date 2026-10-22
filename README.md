@@ -10,7 +10,7 @@ Public site is a React (Vite) static app for Hostinger. Backend is Supabase (Pos
 - Address, hours, phone, WhatsApp, email, Instagram, TikTok and Mobile Money are **placeholders** until edited in Admin → Settings. Empty phone/WhatsApp hides those buttons.
 - Service categories, services, gallery categories, staff, reviews and home/about copy all live in the database. Nothing in the menu is hard-coded.
 - Timezone `Africa/Accra`, currency GHS, language English.
-- Logo file is not here yet. Header/footer use a serif wordmark plus a gold **ML** monogram (also the favicon). Upload a transparent PNG/SVG in Settings when it arrives.
+- The supplied circular gold-on-pink badge is in `public/logo.jpg` and is the header, footer, and favicon. A newer file can still be uploaded in Admin → Settings.
 - Sample services, two staff members (Ama Boateng, Efua Mensah), reviews and copy are marked `[SAMPLE]` / `[PLACEHOLDER]`.
 - Email is implemented via Resend. SMS and WhatsApp notifications are stub providers for Phase 2.
 - Online card/MoMo checkout is out of scope; booking status is structured so a payment gateway can be added later.
