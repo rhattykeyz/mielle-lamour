@@ -1,10 +1,11 @@
-import { hasValue, waLink } from "@/lib/format";
+import { realValue, waLink } from "@/lib/format";
 
 export function WhatsAppFloat({ number }: { number?: string }) {
-  if (!hasValue(number)) return null;
+  const value = realValue(number);
+  if (!value) return null;
   return (
     <a
-      href={waLink(number!)}
+      href={waLink(value)}
       className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg"
       aria-label="Chat on WhatsApp"
     >

@@ -1,0 +1,481 @@
+:root {
+  --home-pink-50: #fff5f7;
+  --home-pink-100: #fde8ee;
+  --home-pink-200: #fad1de;
+  --home-pink-300: #f5b0c6;
+  --home-pink-400: #ec86a8;
+  --home-pink-500: #d9547e;
+  --home-pink-600: #c2185b;
+  --home-pink-700: #a3194f;
+  --home-pink-800: #8a2e52;
+}
+
+.home-page {
+  --home-floral: url("/brand/floral-bg.jpg");
+  color: var(--pink-800);
+  background-color: var(--pink-50);
+  background-image: var(--home-floral);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+/* ---------- HERO ---------- */
+.home-page .home-hero { position: relative; }
+
+.home-page .hero-stage {
+  position: relative;
+  min-height: clamp(560px, 88vh, 860px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  /* index.css paints radial circles on .hero-stage itself */
+  background: none;
+}
+
+/* kill any decorative circle/blob (stopgap until you find the source) */
+.home-page .hero-stage::before,
+.home-page .hero-stage .hero-orb,
+.home-page .hero-stage .hero-circle,
+.home-page .hero-stage .hero-blob { display: none !important; }
+
+/* video / image fills the stage */
+.home-page .hero-stage video,
+.home-page .hero-stage .hero-film {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* even, readable overlay: dark at the bottom, soft rose tint overall */
+.home-page .hero-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* index.css leaves width, height, and border-radius that keep this a circle */
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(60, 14, 38, 0.78) 0%, rgba(60, 14, 38, 0.35) 45%, rgba(60, 14, 38, 0.25) 100%),
+    rgba(194, 24, 91, 0.10);
+}
+
+.home-page .hero-stage .hero-stage-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  min-height: 0;
+  padding: 0 1.5rem;
+  text-align: center;
+  /* index.css puts a second gradient on the copy and stretches it to the viewport */
+  background: none;
+  justify-content: center;
+}
+
+.home-page .hero-stage-copy .hero-kicker {
+  color: #ffe3ec;
+  letter-spacing: 0.38em;
+  font-size: 0.78rem;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
+
+.home-page .hero-stage-copy .home-hero-title,
+.home-page .hero-stage-copy .home-hero-title .hero-name,
+.home-page .hero-stage-copy .home-hero-title .hero-tagline {
+  display: block;
+  margin: 0 auto 1rem;
+  max-width: 820px;
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.08;
+  color: #fff;
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  white-space: normal;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+.home-page .hero-stage-copy .hero-subtitle {
+  color: #ffeef3;
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* ---------- BUTTONS (higher specificity so site-chrome.css can't override) ---------- */
+.home-page .home-hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.home-page .home-hero .hero-stage-copy .btn-gold {
+  background: linear-gradient(135deg, #f4d98a, #d4a64a);
+  color: #4a1030;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.95rem 2.4rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.home-page .home-hero .hero-stage-copy .btn-gold:hover {
+  background: linear-gradient(135deg, #f4d98a, #d4a64a);
+  color: #4a1030;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+}
+
+.home-page .home-hero .hero-stage-copy .btn-ghost {
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  padding: 0.95rem 2.4rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.2s ease;
+}
+.home-page .home-hero .hero-stage-copy .btn-ghost:hover { background: rgba(255, 255, 255, 0.2); }
+
+@media (max-width: 640px) {
+  .home-page .hero-stage { min-height: 520px; }
+  .home-page .home-hero .hero-stage-copy .btn-gold,
+  .home-page .home-hero .hero-stage-copy .btn-ghost { width: 100%; text-align: center; }
+}
+
+.home-page .home-about-grid,
+.home-page .home-hours-grid,
+.home-page .home-about-grid > * {
+  display: grid;
+}
+
+.home-page .home-about-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.home-page .home-about-lead,
+.home-page .home-about-collage,
+.home-page .home-about-room {
+  display: block;
+}
+
+.home-page .home-about-lead {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.home-page .home-about-perfume,
+.home-page .home-frame,
+.home-page .brand-photo {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(194, 24, 91, 0.12);
+  box-shadow: 0 12px 30px rgba(194, 24, 91, 0.08);
+  background: rgba(255, 245, 247, 0.8);
+}
+
+.home-page .home-about-copy,
+.home-page .home-hours-copy,
+.home-page .faq-shell,
+.home-page .card,
+.home-page .invite {
+  background: rgba(255, 245, 247, 0.9);
+  border: 1px solid var(--pink-200);
+  box-shadow: 0 14px 30px rgba(194, 24, 91, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.home-page .home-about-copy,
+.home-page .home-hours-copy,
+.home-page .faq-shell,
+.home-page .card {
+  border-radius: 1.6rem;
+}
+
+.home-page .home-about-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.home-page .home-about-copy h2,
+.home-page .section-head-row h2,
+.home-page .faq-header h2,
+.home-page .home-hours-copy h2,
+.home-page .home-hours-copy h3,
+.home-page .home-about-copy h2 {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.12;
+  text-align: center;
+  color: var(--pink-700);
+}
+
+.home-page .home-about-copy h2,
+.home-page .home-hours-copy h2,
+.home-page .faq-header h2,
+.home-page .section-head-row h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.home-page .home-about-copy p,
+.home-page .home-hours-copy p,
+.home-page .faq-item p,
+.home-page .card p {
+  color: var(--pink-800);
+  line-height: 1.75;
+}
+
+.home-page .home-about-photos,
+.home-page .home-hours-copy,
+.home-page .faq-list {
+  display: grid;
+}
+
+.home-page .home-about-photos {
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  height: 100%;
+}
+
+.home-page .home-about-photos .home-frame {
+  height: 100%;
+}
+
+.home-page .home-frame img,
+.home-page .home-about-perfume img,
+.home-page .brand-photo img,
+.home-page .home-hours-copy img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-page .home-script {
+  display: none !important;
+}
+
+.home-page .section-head-row,
+.home-page .faq-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.home-page .section-head-row h2,
+.home-page .faq-header h2 {
+  margin-top: 0.5rem;
+}
+
+.home-page .mt-8.grid,
+.home-page .grid {
+  gap: 1.5rem;
+}
+
+.home-page .card {
+  text-align: center;
+}
+
+.home-page .card h3,
+.home-page .card h2,
+.home-page .card h1 {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  color: var(--pink-700);
+}
+
+.home-page .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(194, 24, 91, 0.14);
+}
+
+.home-page .faq-shell {
+  padding: 2rem;
+}
+
+.home-page .faq-list {
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.home-page .faq-item {
+  padding: 1.2rem 1.3rem;
+  border-radius: 1.1rem;
+  background: rgba(255, 245, 247, 0.7);
+  border: 1px solid var(--pink-200);
+}
+
+.home-page .faq-item h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.06rem;
+  color: var(--pink-700);
+  font-weight: 700;
+  text-align: left;
+}
+
+.home-page .faq-item p {
+  margin: 0;
+  text-align: left;
+}
+
+.home-page .band-blush,
+.home-page .band-field {
+  background: rgba(253, 232, 238, 0.78);
+  border-top: 1px solid rgba(194, 24, 91, 0.08);
+  border-bottom: 1px solid rgba(194, 24, 91, 0.08);
+}
+
+.home-page .home-hours-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.home-page .home-hours-copy {
+  padding: 2rem;
+}
+
+.home-page .hours-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.home-page .hours-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(194, 24, 91, 0.12);
+  color: var(--pink-800);
+}
+
+.home-page .hours-list li.is-today {
+  background: rgba(250, 209, 222, 0.6);
+  border-radius: 0.8rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  font-weight: 700;
+  color: var(--pink-700);
+}
+
+.home-page .btn-gold {
+  background: var(--pink-600);
+  color: #fff;
+  border: 2px solid var(--pink-600);
+}
+
+.home-page .btn-gold:hover {
+  background: var(--pink-700);
+  border-color: var(--pink-700);
+}
+
+.home-page .btn-ghost,
+.home-page .gold-link {
+  color: var(--pink-600);
+}
+
+.home-page .gold-link {
+  font-weight: 700;
+}
+
+.home-page .gold-link:hover {
+  color: var(--pink-700);
+}
+
+@media (max-width: 1000px) {
+  .home-page .home-about-grid,
+  .home-page .home-hours-grid,
+  .home-page .faq-list,
+  .home-page .home-about-lead {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page .faq-shell,
+  .home-page .home-about-copy,
+  .home-page .home-hours-copy {
+    padding: 1.3rem;
+  }
+}
+
+/* Laptop: text column grows with the copy; photos stay in flow beside the card. */
+@media (min-width: 900px) {
+  .home-page .home-about-grid {
+    overflow: visible;
+  }
+  .home-page .home-about-copy {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .home-page .home-about-collage {
+    position: relative;
+    align-self: start;
+    min-height: auto;
+    height: auto;
+  }
+  .home-page .home-about-photos {
+    position: relative;
+    inset: auto;
+    height: auto;
+    grid-template-rows: none;
+  }
+  .home-page .home-about-photos .home-frame,
+  .home-page .home-about-photos .home-frame:last-child {
+    height: auto;
+    min-height: 0;
+  }
+  .home-page .home-about-photos .home-frame img,
+  .home-page .home-about-photos .home-frame:last-child img,
+  .home-page .home-about-perfume img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+  .home-page .home-about-perfume img {
+    aspect-ratio: 473 / 641;
+  }
+}
+
+@media (min-width: 1001px) {
+  .home-page .home-about-grid {
+    align-items: start;
+    overflow: visible;
+  }
+  .home-page .home-about-lead {
+    grid-template-columns: minmax(0, 1fr);
+    align-self: start;
+    height: auto;
+    min-width: 0;
+  }
+  .home-page .home-about-perfume {
+    margin-bottom: 0;
+  }
+}

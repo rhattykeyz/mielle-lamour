@@ -1,0 +1,136 @@
+/* Header + footer + Follow card. Append AFTER the other CSS files.
+   Targets plain elements (header, nav, footer), so it works without knowing your class names.
+   header:not(article *) skips the page-level header blocks inside pages. */
+:root {
+  --sc-accent: var(--lux-accent, #a8475f);
+  --sc-accent-soft: var(--lux-accent-soft, rgba(168, 71, 95, 0.28));
+  --sc-accent-faint: var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+  --sc-plum: var(--lux-plum, #5a2a3c);
+  --sc-plum-deep: var(--lux-plum-deep, #6b2a40);
+  --sc-serif: var(--lux-serif, "Cormorant Garamond", Georgia, serif);
+}
+header:not(article *) {
+  border-bottom: 1px solid var(--sc-accent-faint);
+  box-shadow: 0 10px 30px -22px rgba(60, 35, 40, 0.35);
+}
+header:not(article *) img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 9999px;
+}
+header:not(article *) a[href="/"] {
+  font-family: var(--sc-serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  letter-spacing: 0.32em;
+  text-transform: none;
+  color: var(--sc-plum-deep);
+  text-decoration: none;
+}
+header:not(article *) nav a {
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sc-plum);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+header:not(article *) nav a:hover { color: var(--sc-accent); }
+header:not(article *) nav a[aria-current="page"],
+header:not(article *) nav a.active {
+  color: var(--sc-accent);
+  border-bottom: 1px solid var(--sc-accent);
+}
+footer {
+  border-top: 1px solid var(--sc-accent-faint);
+  color: var(--sc-plum);
+}
+footer h2, footer h3, footer h4 {
+  font-family: var(--sc-serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  letter-spacing: 0.01em;
+  color: var(--sc-plum-deep);
+}
+footer p, footer li { font-family: var(--sc-serif); font-size: 1.12rem; line-height: 1.6; color: var(--sc-plum); }
+footer a {
+  color: var(--sc-plum-deep);
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+footer a:hover { color: var(--sc-accent); }
+footer a[href="/"] { font-family: var(--sc-serif); font-weight: 500; letter-spacing: 0.04em; }
+.social-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 12rem;
+  padding: 1.75rem 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--sc-accent-faint);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(250, 236, 240, 0.8));
+  box-shadow: 0 14px 34px -18px rgba(60, 35, 40, 0.25);
+  text-decoration: none;
+  letter-spacing: normal;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s ease;
+}
+.social-card:hover { transform: translateY(-3px); box-shadow: 0 24px 46px -20px rgba(60, 35, 40, 0.32); }
+.social-card-kicker { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sc-accent); }
+.social-card-title { font-family: var(--sc-serif); font-size: 2rem; line-height: 1.1; font-weight: 500; color: var(--sc-plum-deep); }
+.social-card-copy { font-family: var(--sc-serif); font-style: italic; font-size: 1.15rem; color: var(--sc-plum); }
+.social-card-cta { margin-top: 0.5rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--sc-accent); }
+@media (prefers-reduced-motion: reduce) {
+  .social-card, header:not(article *) nav a, footer a { transition: none; }
+  .social-card:hover { transform: none; }
+}
+@media (max-width: 639px) {
+  header:not(article *) a[href="/"] {
+    font-size: 1.15rem;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Existing class rules set font and size on the wordmark span and logo image.
+   These match the header rules above so they reach those elements. */
+header.site-header a.chanel-logo span.brand-wordmark {
+  font-family: var(--sc-serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  letter-spacing: 0.32em;
+  text-transform: none;
+  color: var(--sc-plum-deep);
+}
+header.site-header img.brand-mark {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 9999px;
+}
+header.site-header nav a.nav-link {
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sc-plum);
+  text-decoration: none;
+}
+header.site-header nav a.nav-link:hover { color: var(--sc-accent); }
+header.site-header nav a.nav-link[aria-current="page"],
+header.site-header nav a.nav-link.is-active {
+  color: var(--sc-accent);
+  border-bottom: 1px solid var(--sc-accent);
+}
+@media (max-width: 639px) {
+  header.site-header a.chanel-logo span.brand-wordmark {
+    font-size: 1.15rem;
+    letter-spacing: 0.12em;
+  }
+  header.site-header img.brand-mark {
+    width: 76px;
+    height: 76px;
+  }
+}

@@ -1,0 +1,25 @@
+/* Contact and Discounts page polish.
+   Shared colour tokens, .btn-gold, .gold-line, and the Tailwind colour
+   utilities already exist, so they are not repeated here.
+   --pink-soft is new and only used by the discounts glow. */
+
+/* Contact page: field polish. */
+.contact-page label { display: block; }
+.contact-page input,
+.contact-page textarea { color: var(--ink); font-family: inherit; }
+.contact-page input::placeholder,
+.contact-page textarea::placeholder { color: #b9a8ae; }
+.contact-page textarea { resize: vertical; min-height: 8rem; }
+.contact-page a:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; border-radius: 4px; }
+
+/* Discounts page: soft backdrop and card list. */
+.discounts-page {
+  --pink-soft: #fdf3f4;
+  background: radial-gradient(60rem 22rem at 50% -6rem, var(--pink-soft), transparent 70%);
+}
+.discounts-page li { list-style: none; }
+
+/* Respect reduced motion. Existing .btn-gold rules are left untouched. */
+@media (prefers-reduced-motion: reduce) {
+  .discounts-page li { transition: none; }
+}

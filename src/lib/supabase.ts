@@ -3,13 +3,18 @@ import { createClient } from "@supabase/supabase-js";
 const url = import.meta.env.VITE_SUPABASE_URL;
 const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!url || !anon) {
+export const supabaseConfigured = Boolean(url && anon);
+
+if (!supabaseConfigured) {
   console.warn(
     "Supabase env vars are missing. Copy .env.example to .env.local and add your project keys.",
   );
 }
 
-export const supabase = createClient(url ?? "", anon ?? "", {
+export const supabase = createClient(
+  url || "https://placeholder.supabase.co",
+  anon || "public-anon-key",
+  {
   auth: {
     persistSession: true,
     autoRefreshToken: true,

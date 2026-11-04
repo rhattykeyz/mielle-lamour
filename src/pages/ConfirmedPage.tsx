@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { formatDateTime, money } from "@/lib/format";
+import { formatDateTime, money, realValue } from "@/lib/format";
 import { Seo } from "@/lib/seo";
 
 type Booking = {
@@ -46,13 +46,21 @@ export function ConfirmedPage() {
           <div className="mt-4 rounded-2xl bg-pink p-4 text-sm">
             <p>
               Status: <strong>Pending deposit</strong> of {money(booking.deposit_amount)}. Hold until{" "}
-              {booking.deposit_hold_until ? formatDateTime(booking.deposit_hold_until) : "—"}.
+              {booking.deposit_hold_until ? formatDateTime(booking.deposit_hold_until) : "not set"}.
             </p>
             <p className="mt-2">Mobile Money</p>
-            <p>{booking.mobile_money?.network} · {booking.mobile_money?.name}</p>
-            <p>{booking.mobile_money?.number}</p>
+            {realValue(booking.mobile_money?.network) || realValue(booking.mobile_money?.name) ? (
+              <p>
+                {[realValue(booking.mobile_money?.network), realValue(booking.mobile_money?.name)]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+            ) : null}
+            {realValue(booking.mobile_money?.number) ? <p>{realValue(booking.mobile_money?.number)}</p> : null}
             <p>Use reference {booking.reference}.</p>
-            <p className="mt-2">{booking.mobile_money?.instructions}</p>
+            {realValue(booking.mobile_money?.instructions) ? (
+              <p className="mt-2">{realValue(booking.mobile_money?.instructions)}</p>
+            ) : null}
           </div>
         )}
       </div>

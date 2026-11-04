@@ -7,6 +7,10 @@ export default {
         pink: {
           DEFAULT: "var(--pink)",
           deep: "var(--pink-deep)",
+          field: "var(--pink-field)",
+          blush: "var(--pink-blush)",
+          rose: "var(--pink-rose)",
+          peony: "var(--pink-peony)",
         },
         gold: {
           DEFAULT: "var(--gold)",

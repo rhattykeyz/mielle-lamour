@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addDays, format } from "date-fns";
 import { callFunction } from "@/lib/supabase";
-import { formatDateTime, formatTime } from "@/lib/format";
+import { formatDateTime, formatTime, visibleCopy } from "@/lib/format";
 import { Seo } from "@/lib/seo";
 import type { Slot } from "@/types";
 
@@ -114,7 +114,7 @@ export function ManageBookingPage() {
           <p>
             {formatDateTime(booking.starts_at)} with {booking.staff_name}
           </p>
-          <p className="text-sm">{booking.services.map((s) => s.name).join(", ")}</p>
+          <p className="text-sm">{booking.services.map((s) => visibleCopy(s.name)).join(", ")}</p>
           <button type="button" className="btn-ghost mt-4" onClick={cancel}>
             Cancel booking
           </button>
@@ -133,7 +133,7 @@ export function ManageBookingPage() {
             <button
               key={`${s.staff_id}-${s.starts_at}`}
               type="button"
-              className="rounded-full bg-pink px-4 py-2 text-sm"
+              className="rounded-full bg-cream px-4 py-2 text-sm"
               onClick={() => reschedule(s)}
             >
               {formatTime(s.starts_at)} · {s.staff_name.split(" ")[0]}

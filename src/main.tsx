@@ -6,6 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import App from "@/App";
 import "@/index.css";
+import "./site-chrome.css";
+import "@/styles/site-redesign.css";
+import "@/styles/mielle-redesign.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

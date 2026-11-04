@@ -38,6 +38,17 @@ const pages = [
     description: "Choose a service, stylist and time. Pay in person at the salon in Accra.",
   },
   {
+    path: "discounts",
+    title: "Discounts | Mielle L'Amour",
+    description:
+      "At Mielle L'Amour, we believe pampering is for everyone. Luxury should be accessible, enjoyable and shared, because every person deserves to feel beautiful, valued and spoiled.",
+  },
+  {
+    path: "luxury",
+    title: "Luxury | Mielle L'Amour",
+    description: "Private, elevated beauty rituals and gifting experiences at Mielle L'Amour.",
+  },
+  {
     path: "contact",
     title: "Contact | Mielle L'Amour",
     description: "Find Mielle L'Amour in Accra. Hours, map, WhatsApp and contact form.",
@@ -90,4 +101,31 @@ writeFileSync(
 );
 
 copyFileSync(join(dist, "favicon.svg"), join(dist, "favicon.svg"));
-console.log(`Prerendered ${pages.length} HTML shells and sitemap.xml`);
+
+// Client-only routes have no unique HTML of their own. Copy the SPA shell so
+// Netlify serves them with 200 instead of its own 404 page. 404.html is the
+// same shell, so unknown paths still boot the app.
+const shells = [
+  "admin",
+  "admin/login",
+  "admin/calendar",
+  "admin/bookings/new",
+  "admin/services",
+  "admin/staff",
+  "admin/clients",
+  "admin/gallery",
+  "admin/content",
+  "admin/settings",
+  "admin/export",
+  "admin/activity",
+  "book/confirmed",
+];
+const spa = readFileSync(join(dist, "index.html"), "utf8");
+for (const shell of shells) {
+  const file = join(dist, shell, "index.html");
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, spa);
+}
+writeFileSync(join(dist, "404.html"), spa);
+
+console.log(`Prerendered ${pages.length} HTML shells, ${shells.length} app shells, and sitemap.xml`);

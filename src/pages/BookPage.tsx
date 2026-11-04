@@ -1,9 +1,10 @@
 import { FormEvent, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Reveal } from "@/components/motion/Reveal";
 import { addDays, format } from "date-fns";
 import { useCategories, usePublicSettings, useServices, useStaff } from "@/hooks/usePublicData";
 import { callFunction } from "@/lib/supabase";
-import { formatTime, money } from "@/lib/format";
+import { formatTime, money, realValue, visibleCopy } from "@/lib/format";
 import { Seo } from "@/lib/seo";
 import type { Slot } from "@/types";
 
@@ -28,6 +29,7 @@ export function BookPage() {
   const { data: services } = useServices();
   const { data: staff } = useStaff();
   const { data: settings } = usePublicSettings();
+  const cancellationPolicy = realValue(settings?.cancellation_policy);
 
   const [selected, setSelected] = useState<string[]>(() => {
     const s = params.get("service");
@@ -42,7 +44,6 @@ export function BookPage() {
   const [submitting, setSubmitting] = useState(false);
 
   const chosen = (services ?? []).filter((s) => selected.includes(s.id));
-  const duration = chosen.reduce((a, s) => a + s.duration_minutes, 0);
   const total = chosen.reduce((a, s) => a + Number(s.price_ghs), 0);
 
   const grouped = useMemo(() => {
@@ -105,22 +106,27 @@ export function BookPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="book-page mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:py-14">
+      <div>
       <Seo
         title="Book an appointment"
         description="Book nails, beauty or spa at Mielle L'Amour in Accra. Pay in person."
         path="/book"
       />
-      <h1 className="font-serif text-5xl">Book with Mielle L'Amour</h1>
-      <p className="mt-3 text-ink-muted">
-        Payment is made in person at the salon. No account needed.
-      </p>
+      <Reveal>
+        <h1 className="font-serif text-5xl">Book with Mielle L'Amour</h1>
+        <div className="gold-line mt-4 max-w-[6.5rem]" aria-hidden />
+        <p className="mt-3 text-ink-muted">
+          Payment is made in person at the salon. No account needed.
+        </p>
+      </Reveal>
 
+      <Reveal delay={60}>
       <section className="mt-8">
         <h2 className="font-serif text-2xl">1. Services</h2>
         {grouped.map(({ cat, items }) => (
           <fieldset key={cat.id} className="mt-4">
-            <legend className="text-sm uppercase tracking-widest text-gold-deep">{cat.name}</legend>
+            <legend className="text-sm uppercase tracking-widest text-gold-deep">{visibleCopy(cat.name)}</legend>
             <div className="mt-2 space-y-2">
               {items.map((s) => (
                 <label key={s.id} className="flex cursor-pointer items-start gap-3 rounded-2xl bg-white p-3 normal-case tracking-normal">
@@ -135,9 +141,9 @@ export function BookPage() {
                     }
                   />
                   <span>
-                    <span className="block font-medium">{s.name}</span>
+                    <span className="block font-medium">{visibleCopy(s.name)}</span>
                     <span className="text-sm text-ink-muted">
-                      {s.duration_minutes} min · {money(s.price_ghs, s.price_from)}
+                      {money(s.price_ghs, s.price_from)}
                       {s.requires_deposit ? " · deposit required" : ""}
                     </span>
                   </span>
@@ -148,11 +154,13 @@ export function BookPage() {
         ))}
         {!!chosen.length && (
           <p className="mt-3 text-sm">
-            {duration} min together · {money(total)}
+            {money(total)}
           </p>
         )}
       </section>
+      </Reveal>
 
+      <Reveal delay={100}>
       <section className="mt-8">
         <h2 className="font-serif text-2xl">2. Team member</h2>
         <select className="mt-3" value={staffId} onChange={(e) => setStaffId(e.target.value)}>
@@ -164,7 +172,9 @@ export function BookPage() {
           ))}
         </select>
       </section>
+      </Reveal>
 
+      <Reveal delay={140}>
       <section className="mt-8">
         <h2 className="font-serif text-2xl">3. Date & time</h2>
         <div className="mt-3 flex flex-wrap items-end gap-3">
@@ -185,7 +195,7 @@ export function BookPage() {
               className={`rounded-full px-4 py-2 text-sm ${
                 slot?.starts_at === s.starts_at && slot.staff_id === s.staff_id
                   ? "bg-gold"
-                  : "bg-pink"
+                  : "bg-cream"
               }`}
             >
               {formatTime(s.starts_at)}
@@ -194,8 +204,10 @@ export function BookPage() {
           ))}
         </div>
       </section>
+      </Reveal>
 
-      <form onSubmit={onSubmit} className="card mt-8 space-y-4 rounded-3xl p-6">
+      <Reveal delay={180}>
+      <form onSubmit={onSubmit} className="mt-8 space-y-4 border-t-2 border-[color:var(--pink-line)] pt-6">
         <h2 className="font-serif text-2xl">4. Your details</h2>
         <p className="hidden" aria-hidden>
           <label>
@@ -239,11 +251,15 @@ export function BookPage() {
           </span>
         </label>
         {error && <p className="text-sm text-[var(--error)]">{error}</p>}
-        <p className="text-xs text-ink-muted">{settings?.cancellation_policy}</p>
+        <p className="text-xs text-ink-muted">
+          {cancellationPolicy ? visibleCopy(cancellationPolicy) : null}
+        </p>
         <button type="submit" className="btn-gold" disabled={submitting}>
           {submitting ? "Booking…" : "Confirm booking"}
         </button>
       </form>
+      </Reveal>
+      </div>
     </div>
   );
 }

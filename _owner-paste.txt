@@ -1,0 +1,723 @@
+/* Put this at the VERY TOP of your global stylesheet (an @import must come first),
+   or add the <link> from the note below to index.html instead. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
+
+:root {
+  --lux-serif: "Cormorant Garamond", "Playfair Display", Georgia, "Times New Roman", serif;
+  --lux-plum: #5a2a3c;      /* body copy on cards */
+  --lux-plum-deep: #6b2a40; /* headings */
+}
+
+/* Force the serif everywhere this page asks for it */
+.lux-page .font-serif,
+.lux-page h1,
+.lux-page h2 {
+  font-family: var(--lux-serif);
+  font-weight: 500;
+}
+
+/* Cormorant runs small, so scale it up a touch */
+.lux-page h2 { font-size: clamp(2.4rem, 7vw, 3.6rem); letter-spacing: 0.01em; color: var(--lux-plum-deep); }
+.lux-title-main { font-weight: 500; letter-spacing: 0.04em; color: var(--lux-plum-deep); }
+.lux-title-sub { font-weight: 400; }
+
+.lux-page .lux-lead { font-size: 1.15em; font-weight: 500; color: var(--lux-plum); }
+
+/* Offer sentences: light, readable, no heavy bold magenta */
+.lux-page .offer-line {
+  font-family: var(--lux-serif);
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: var(--lux-plum);
+}
+@media (min-width: 640px) { .lux-page .offer-line { font-size: 1.35rem; } }
+@media (min-width: 1024px) { .lux-page .offer-card-feature .offer-line { font-size: 1.7rem; } }
+
+/* Card numbers: elegant italic numerals */
+.lux-page .lux-num {
+  font-family: var(--lux-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--lux-accent);
+}
+
+/* Detail line under each offer title: soft italic */
+.lux-page .offer-detail {
+  font-family: var(--lux-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--lux-plum);
+  opacity: 0.85;
+}
+@media (min-width: 640px) { .lux-page .offer-detail { font-size: 1.2rem; } }
+
+/* Small caps labels stay light and wide */
+.lux-page .offer-kicker p:first-child { font-weight: 500; color: var(--lux-plum-deep); }
+
+/* Append to your global stylesheet (after the existing .offer-card / .luxury-page rules). No gold: rose + ink only. */
+
+:root {
+  --lux-accent: #a8475f;               /* deep rose */
+  --lux-accent-soft: rgba(168, 71, 95, 0.28);
+  --lux-accent-faint: rgba(168, 71, 95, 0.14);
+  --lux-shadow: 0 1px 2px rgba(60, 35, 40, 0.04), 0 14px 34px -16px rgba(60, 35, 40, 0.22);
+  --lux-shadow-hover: 0 2px 4px rgba(60, 35, 40, 0.05), 0 26px 50px -18px rgba(60, 35, 40, 0.30);
+}
+
+/* Soft blush wash behind the page */
+.lux-page {
+  background:
+    radial-gradient(60rem 28rem at 85% -5%, rgba(244, 214, 220, 0.5), transparent 70%),
+    radial-gradient(50rem 26rem at -10% 40%, rgba(246, 232, 236, 0.5), transparent 70%);
+}
+
+/* Recolour any existing gold text / rules inside this page to rose */
+.lux-page .text-gold-deep { color: var(--lux-accent); }
+.lux-page .gold-line { background: linear-gradient(90deg, var(--lux-accent), transparent); }
+
+/* Title accent line */
+.lux-title-sub {
+  background: linear-gradient(100deg, #8c3a50 0%, #c06a80 50%, #8c3a50 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+.lux-lead { letter-spacing: 0.005em; }
+
+/* Ornamental divider */
+.lux-ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: 28rem;
+  margin-inline: auto;
+}
+.lux-ornament span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lux-accent-soft), transparent);
+}
+.lux-ornament i {
+  width: 7px;
+  height: 7px;
+  transform: rotate(45deg);
+  border: 1px solid var(--lux-accent);
+}
+
+/* Cards */
+.lux-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--lux-shadow);
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+}
+.lux-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--lux-accent), transparent);
+  opacity: 0.45;
+  transition: opacity 0.45s ease;
+}
+.lux-card::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--lux-accent-faint);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.lux-card-feature {
+  background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(250, 236, 240, 0.75));
+}
+@media (hover: hover) {
+  .lux-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--lux-shadow-hover);
+    border-color: var(--lux-accent-soft);
+  }
+  .lux-card:hover::before { opacity: 1; }
+  .lux-card:hover .lux-arrow { transform: translateX(5px); }
+}
+
+.lux-num { opacity: 0.8; font-variant-numeric: lining-nums; }
+
+/* Framed offer art */
+.lux-art {
+  border-radius: 9999px;
+  object-fit: cover;
+  padding: 3px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--lux-accent-soft), 0 6px 14px -6px rgba(60, 35, 40, 0.3);
+}
+
+.lux-card-foot { border-top: 1px solid var(--lux-accent-faint); margin-top: auto; }
+.lux-chip { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(4px); }
+
+.lux-link { position: relative; padding-bottom: 2px; }
+.lux-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.lux-link:hover::after, .lux-link:focus-visible::after { transform: scaleX(1); }
+.lux-arrow { display: inline-block; transition: transform 0.35s ease; }
+
+.lux-mark {
+  border-left: 1px solid transparent;
+  border-image: linear-gradient(to bottom, var(--lux-accent), transparent) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-card, .lux-arrow, .lux-link::after { transition: none; }
+  .lux-card:hover { transform: none; }
+}
+
+/* Append after luxury-additions.css and luxury-type.css. Uses --lux-accent, --lux-plum etc. from those files. */
+
+.about-page .ab-title { font-weight: 500; letter-spacing: 0.01em; color: var(--lux-plum-deep, #6b2a40); }
+.about-page .ab-tagline { color: var(--lux-accent, #a8475f); font-weight: 400; }
+.about-page .ab-lead { color: var(--lux-plum, #5a2a3c); font-weight: 500; }
+.about-page .ab-orn { margin-inline: 0; max-width: 12rem; }
+
+/* Hero card */
+.ab-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  border: 1px solid var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(250, 236, 240, 0.7));
+  box-shadow: var(--lux-shadow, 0 14px 34px -16px rgba(60, 35, 40, 0.22));
+  padding: 1.5rem 1.25rem;
+}
+.ab-shell::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+  border-radius: calc(1.75rem - 6px);
+  pointer-events: none;
+}
+@media (min-width: 640px) { .ab-shell { padding: 2.5rem 2.25rem; } }
+@media (min-width: 1024px) { .ab-shell { padding: 3.5rem 3.5rem; } }
+
+.ab-grid { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 1024px) { .ab-grid { grid-template-columns: 1.15fr 0.85fr; gap: 4rem; } }
+
+/* Two pillars */
+.ab-point { border-left: 1px solid transparent; border-image: linear-gradient(to bottom, var(--lux-accent, #a8475f), transparent) 1; padding-left: 1.1rem; }
+.ab-point-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--lux-accent, #a8475f);
+}
+.ab-point-text {
+  margin-top: 0.5rem;
+  font-family: var(--lux-serif, Georgia, serif);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--lux-plum, #5a2a3c);
+}
+
+/* Arched image, echoing the floral arch in the photo */
+.ab-visual { position: relative; max-width: 26rem; margin-inline: auto; width: 100%; padding-bottom: 3.5rem; }
+.ab-arch {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px 1.5rem 1.5rem;
+  padding: 6px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--lux-accent-soft, rgba(168, 71, 95, 0.28)), var(--lux-shadow-hover, 0 26px 50px -18px rgba(60, 35, 40, 0.3));
+}
+.ab-arch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px 999px 1.25rem 1.25rem;
+  display: block;
+}
+
+/* Stat card overlaps the bottom of the arch */
+.ab-stat {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(88%, 21rem);
+  padding: 1rem 1.25rem;
+  text-align: center;
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+  box-shadow: var(--lux-shadow, 0 14px 34px -16px rgba(60, 35, 40, 0.22));
+}
+.ab-stat-label { font-size: 0.64rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--lux-accent, #a8475f); font-weight: 500; }
+.ab-stat-title { margin-top: 0.35rem; font-family: var(--lux-serif, Georgia, serif); font-size: 1.35rem; line-height: 1.2; color: var(--lux-plum-deep, #6b2a40); font-weight: 500; }
+.ab-stat-copy { margin-top: 0.35rem; font-size: 0.82rem; line-height: 1.5; color: var(--lux-plum, #5a2a3c); opacity: 0.85; }
+
+/* Append AFTER luxury-additions.css and luxury-type.css (it uses their variables).
+   Scoped to .home-page so nothing else changes. Rose + plum, no gold. */
+
+.home-page {
+  --h-accent: var(--lux-accent, #a8475f);
+  --h-accent-soft: var(--lux-accent-soft, rgba(168, 71, 95, 0.28));
+  --h-accent-faint: var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+  --h-plum: var(--lux-plum, #5a2a3c);
+  --h-plum-deep: var(--lux-plum-deep, #6b2a40);
+  --h-serif: var(--lux-serif, "Cormorant Garamond", Georgia, serif);
+}
+
+/* Headings: light serif, plum */
+.home-page h1,
+.home-page h2,
+.home-page h3,
+.home-page .font-serif {
+  font-family: var(--h-serif);
+  font-weight: 500;
+}
+.home-page h2 { color: var(--h-plum-deep); letter-spacing: 0.01em; }
+.home-page .text-gold-deep { color: var(--h-accent); }
+
+/* Hero tagline in rose gradient */
+.home-page .hero-tagline {
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+.home-page .hero-kicker { letter-spacing: 0.42em; }
+
+/* Little script labels ("treatments", "client love", "faq" ...) */
+.home-page .home-script {
+  color: var(--h-accent);
+  letter-spacing: 0.04em;
+}
+
+/* Cards (categories, testimonials, featured services) */
+.home-page .card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--h-accent-faint);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(250, 238, 242, 0.75));
+  box-shadow: 0 1px 2px rgba(60, 35, 40, 0.04), 0 14px 34px -18px rgba(60, 35, 40, 0.22);
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+}
+.home-page .card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--h-accent), transparent);
+  opacity: 0.4;
+  transition: opacity 0.45s ease;
+}
+@media (hover: hover) {
+  .home-page a.card:hover,
+  .home-page article.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--h-accent-soft);
+    box-shadow: 0 2px 4px rgba(60, 35, 40, 0.05), 0 26px 50px -20px rgba(60, 35, 40, 0.3);
+  }
+  .home-page .card:hover::before { opacity: 1; }
+}
+.home-page .card h3 { color: var(--h-plum-deep); font-size: 1.7rem; }
+.home-page .card p { color: var(--h-plum); }
+
+/* Testimonial quote in serif italic */
+.home-page article.card > p:nth-of-type(1) {
+  font-family: var(--h-serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.45;
+}
+
+/* Photo frames: white mat + thin rose ring */
+.home-page .home-frame {
+  padding: 6px;
+  background: #fff;
+  border-radius: 1.4rem;
+  box-shadow: 0 0 0 1px var(--h-accent-soft), 0 22px 44px -20px rgba(60, 35, 40, 0.3);
+  overflow: hidden;
+}
+.home-page .home-frame img { border-radius: 1.1rem; }
+
+/* Soft blush bands */
+.home-page .band-blush {
+  background: linear-gradient(180deg, rgba(250, 236, 240, 0.7), rgba(255, 255, 255, 0) 100%);
+}
+
+/* About/hours "invite" panels */
+.home-page .invite {
+  border: 1px solid var(--h-accent-faint);
+  box-shadow: 0 14px 34px -18px rgba(60, 35, 40, 0.22);
+}
+.home-page .invite p { color: var(--h-plum); }
+
+/* FAQ */
+.home-page .faq-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--h-accent-faint);
+}
+.home-page .faq-item:last-child { border-bottom: 0; }
+.home-page .faq-item h3 { font-size: 1.5rem; color: var(--h-plum-deep); }
+.home-page .faq-item p { margin-top: 0.4rem; color: var(--h-plum); line-height: 1.7; }
+
+/* Gallery arrows: round white buttons */
+.home-page .nail-arrow {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--h-accent-soft);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--h-accent);
+  box-shadow: 0 8px 20px -10px rgba(60, 35, 40, 0.35);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.home-page .nail-arrow:hover { background: var(--h-accent); color: #fff; transform: scale(1.06); }
+
+/* Opening hours: today highlighted in rose */
+.home-page .hours-list li { border-bottom: 1px solid var(--h-accent-faint); padding: 0.55rem 0; }
+.home-page .hours-list li.is-today { color: var(--h-accent); font-weight: 500; }
+
+/* Text links ("About us", "Discounts", "All services") */
+.home-page .gold-link { color: var(--h-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .card, .home-page .nail-arrow { transition: none; }
+  .home-page a.card:hover, .home-page article.card:hover { transform: none; }
+}
+
+/* Append AFTER home-additions.css. Fixes seen in the desktop screenshots. */
+
+/* ---- Hero buttons: readable on the dark photo ---- */
+.home-page .hero-stage .btn-gold,
+.home-page .hero-stage .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 2.2rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.home-page .hero-stage .btn-gold {
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--lux-plum-deep, #6b2a40);
+  border: 1px solid #fff;
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
+}
+.home-page .hero-stage .btn-gold:hover { background: #fff; transform: translateY(-2px); }
+.home-page .hero-stage .btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
+}
+.home-page .hero-stage .btn-ghost:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* Hero title: lighter weight, a touch of shadow for contrast */
+.home-page .home-hero-title { font-weight: 500; text-shadow: 0 2px 24px rgba(40, 10, 25, 0.35); }
+.home-page .hero-kicker { color: rgba(255, 255, 255, 0.9); }
+
+/* Optional: if the big pink circle bottom-left comes from the hero stage, uncomment:
+.home-page .hero-stage::before,
+.home-page .hero-stage::after { display: none; }
+*/
+
+/* ---- About section: fill the width, balanced two-column layout ---- */
+.home-page .home-about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .home-page .home-about-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+}
+
+.home-page .home-about-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+/* Editorial stagger: every second photo sits lower */
+@media (min-width: 640px) {
+  .home-page .home-about-photos .home-frame:nth-child(even) { margin-top: 2.25rem; }
+}
+/* An odd last photo spans the full width as a wide crop */
+.home-page .home-about-photos .home-frame:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.home-page .home-about-photos .home-frame:last-child:nth-child(odd) img { aspect-ratio: 16 / 10; }
+
+/* About panel: more room, smaller heading so it doesn't wrap three times */
+.home-page .home-about-copy h2 { font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.05; }
+.home-page .home-about-copy p { font-family: var(--lux-serif, Georgia, serif); font-size: 1.2rem; line-height: 1.6; }
+
+/* ---- Section headings: balanced wrapping, no orphan words ---- */
+.home-page .faq-header h2,
+.home-page section h2 {
+  text-wrap: balance;
+}
+.home-page .faq-header h2 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1.1; }
+.home-page .faq-shell {
+  border: 1px solid var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+  box-shadow: 0 14px 34px -18px rgba(60, 35, 40, 0.22);
+}
+
+/* ---- Featured services: serif heading, aligned cards ---- */
+.home-page .band-field h2,
+.home-page .band-blush h2 { font-family: var(--lux-serif, Georgia, serif); font-weight: 500; }
+
+.home-page .band-field article.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.home-page .band-field article.card .btn-gold { margin-top: auto; }
+.home-page .band-field article.card p { margin-bottom: 1rem; font-size: 1rem; letter-spacing: 0.04em; }
+
+/* Tier label ("Basic", "Premium") under the service name — see the snippet in the reply */
+.home-page .svc-tier {
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--lux-accent, #a8475f);
+}
+
+/* ---- Stop sideways scrolling ---- */
+.home-page { overflow-x: clip; }
+
+/* ---- Testimonial stars in rose, quieter name line ---- */
+.home-page article.card [aria-label="Five star review"] { color: var(--lux-accent, #a8475f); letter-spacing: 0.15em; }
+.home-page article.card > p:last-child { color: var(--lux-plum-deep, #6b2a40); opacity: 0.8; }
+
+/* ---- Opening hours panel: one alignment, calmer headings ---- */
+.home-page .home-hours-copy h2,
+.home-page .home-hours-copy h3 { text-align: left; }
+.home-page .home-hours-copy h2 { font-size: clamp(2.4rem, 4vw, 3.4rem); line-height: 1.05; }
+.home-page .home-hours-copy h3 {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  font-size: 1.9rem;
+  border-top: 1px solid var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+}
+.home-page .hours-list li { font-size: 1.05rem; }
+.home-page .hours-list li span:last-child { font-variant-numeric: tabular-nums; }
+
+/* ================= HERO ================= */
+.home-page .hero-stage { position: relative; isolation: isolate; }
+
+/* One smooth overlay instead of the pink circle: deeper at the bottom for the buttons */
+.home-page .hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(60, 15, 35, 0.15), rgba(60, 15, 35, 0.55) 100%),
+    linear-gradient(180deg, rgba(60, 15, 35, 0.15) 0%, rgba(50, 10, 28, 0.62) 100%);
+}
+.home-page .hero-stage::after { display: none; }
+.home-page .hero-stage-copy { position: relative; z-index: 2; }
+
+/* Small label with flanking lines */
+.home-page .hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  color: rgba(255, 255, 255, 0.92);
+}
+.home-page .hero-kicker::before,
+.home-page .hero-kicker::after {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+}
+@media (max-width: 640px) {
+  .home-page .hero-kicker { letter-spacing: 0.3em; font-size: 0.64rem; }
+  .home-page .hero-kicker::before, .home-page .hero-kicker::after { width: 1.25rem; }
+}
+
+/* Title: light serif, second line in soft italic */
+.home-page .home-hero-title {
+  font-family: var(--lux-serif, "Cormorant Garamond", Georgia, serif);
+  font-weight: 500;
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: 0 2px 30px rgba(40, 8, 24, 0.45);
+}
+.home-page .hero-name { display: block; }
+.home-page .hero-tagline {
+  display: block;
+  margin-top: 0.15em;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.82em;
+  color: #fbe3ea;
+}
+/* Thin divider under the title */
+.home-page .home-hero-title::after {
+  content: "";
+  display: block;
+  width: 6rem;
+  height: 1px;
+  margin: 1.6rem auto 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+}
+
+.home-page .hero-subtitle {
+  font-family: var(--lux-serif, Georgia, serif);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Header + footer + Follow card. Append AFTER the other CSS files.
+   Targets plain elements (header, nav, footer), so it works without knowing your class names.
+   `header:not(article *)` skips the page-level <header> blocks inside pages. */
+
+:root {
+  --sc-accent: var(--lux-accent, #a8475f);
+  --sc-accent-soft: var(--lux-accent-soft, rgba(168, 71, 95, 0.28));
+  --sc-accent-faint: var(--lux-accent-faint, rgba(168, 71, 95, 0.14));
+  --sc-plum: var(--lux-plum, #5a2a3c);
+  --sc-plum-deep: var(--lux-plum-deep, #6b2a40);
+  --sc-serif: var(--lux-serif, "Cormorant Garamond", Georgia, serif);
+}
+
+/* ---------- Header ---------- */
+header:not(article *) {
+  border-bottom: 1px solid var(--sc-accent-faint);
+  box-shadow: 0 10px 30px -22px rgba(60, 35, 40, 0.35);
+}
+
+/* Smaller logo so the sticky header stops eating the screen */
+header:not(article *) img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 9999px;
+}
+
+/* Brand name: light serif, plum, wide tracking */
+header:not(article *) a[href="/"] {
+  font-family: var(--sc-serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  letter-spacing: 0.32em;
+  text-transform: none;
+  color: var(--sc-plum-deep);
+  text-decoration: none;
+}
+
+/* Nav links */
+header:not(article *) nav a {
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sc-plum);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+header:not(article *) nav a:hover { color: var(--sc-accent); }
+header:not(article *) nav a[aria-current="page"],
+header:not(article *) nav a.active {
+  color: var(--sc-accent);
+  border-bottom: 1px solid var(--sc-accent);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  border-top: 1px solid var(--sc-accent-faint);
+  color: var(--sc-plum);
+}
+footer h2,
+footer h3,
+footer h4 {
+  font-family: var(--sc-serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  letter-spacing: 0.01em;
+  color: var(--sc-plum-deep);
+}
+footer p,
+footer li { font-family: var(--sc-serif); font-size: 1.12rem; line-height: 1.6; color: var(--sc-plum); }
+footer a {
+  color: var(--sc-plum-deep);
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+footer a:hover { color: var(--sc-accent); }
+footer a[href="/"] { font-family: var(--sc-serif); font-weight: 500; letter-spacing: 0.04em; }
+
+/* ---------- Follow card (replaces the social embed) ---------- */
+.social-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 12rem;
+  padding: 1.75rem 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--sc-accent-faint);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(250, 236, 240, 0.8));
+  box-shadow: 0 14px 34px -18px rgba(60, 35, 40, 0.25);
+  text-decoration: none;
+  letter-spacing: normal;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s ease;
+}
+.social-card:hover { transform: translateY(-3px); box-shadow: 0 24px 46px -20px rgba(60, 35, 40, 0.32); }
+.social-card-kicker { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sc-accent); }
+.social-card-title { font-family: var(--sc-serif); font-size: 2rem; line-height: 1.1; font-weight: 500; color: var(--sc-plum-deep); }
+.social-card-copy { font-family: var(--sc-serif); font-style: italic; font-size: 1.15rem; color: var(--sc-plum); }
+.social-card-cta { margin-top: 0.5rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--sc-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .social-card, header:not(article *) nav a, footer a { transition: none; }
+  .social-card:hover { transform: none; }
+} he title is now Cormorant, so part of the CSS is loading, but some of the hero changes aren’t showing. The small label has no flanking lines, the buttons aren’t pills, and the pink circle is still there. That tells me home-fixes.css isn’t loaded, or it’s loading before the earlier files. The two-line title also needs the one-line change in HomePage.tsx.
+
+To rule out load order, I’ll merge everything into one file in the correct order.
+
+I’ve merged all six stylesheets into one file, luxury.css, in the right order so nothing overrides anything by accident. The font import is at the top, followed by the Discounts, About, Home, hero and header/footer styles.
+
+Use it in place of the separate files:
+
+Delete the separate CSS files you pasted in earlier (luxury-type.css, luxury-additions.css, about-additions.css, home-additions.css, home-fixes.css, site-chrome.css).
+Import luxury.css once, last, after your own HomePage.css and global styles. For example, put import "./luxury.css"; in main.tsx, below the line that imports your global CSS. Being last matters because these rules need to win over your existing styles.
+Restart the dev server (Ctrl+C, then npm run dev) and do a hard refresh (Ctrl+Shift+R).
+
+Check that it loaded: the hero’s “NAIL, BEAUTY & SPA IN ACCRA” label should have a thin line on each side, the buttons should be white pills, and the pink circle should be gone.
+
+For the two-line hero title, make the one-line change in HomePage.tsx I mentioned earlier. Replace the splitHeroSlogan line with const [heroName, heroLine] = heroTitle.split(/,\s*/);.
+
+If the hero still looks the same after the hard refresh, send me a fresh screenshot and the hero rules from HomePage.css, and I’ll work out what’s overriding it.

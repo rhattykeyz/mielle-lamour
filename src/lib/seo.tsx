@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { realValue } from "@/lib/format";
 
 export function Seo({
   title,
@@ -37,20 +38,27 @@ export function LocalBusinessJsonLd({
   } | null;
 }) {
   const site = (import.meta.env.VITE_SITE_URL || "https://example.com").replace(/\/$/, "");
+  const streetAddress = realValue(settings?.address);
+  const telephone = realValue(settings?.phone);
+  const email = realValue(settings?.email);
   const data = {
     "@context": "https://schema.org",
     "@type": "BeautySalon",
     name: "Mielle L'Amour",
     url: site,
     image: `${site}/logo.jpg`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: settings?.address || "[ADDRESS, AREA, ACCRA]",
-      addressLocality: "Accra",
-      addressCountry: "GH",
-    },
-    telephone: settings?.phone || undefined,
-    email: settings?.email || undefined,
+    ...(streetAddress
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            streetAddress,
+            addressLocality: "Accra",
+            addressCountry: "GH",
+          },
+        }
+      : {}),
+    ...(telephone ? { telephone } : {}),
+    ...(email ? { email } : {}),
     priceRange: "GHS",
   };
   return (
