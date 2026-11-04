@@ -41,6 +41,27 @@
   --success: #8A2E52;
 }
 
+/* Use only the requested system fonts across public pages and admin. */
+html,
+body,
+button,
+input,
+select,
+textarea,
+.public-site,
+.public-site * {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.public-site h1,
+.public-site h2,
+.public-site h3,
+.public-site h4,
+.public-site h5,
+.public-site h6 {
+  font-family: "Bookman Old Style", "Book Antiqua", Georgia, serif !important;
+}
+
 /* Public pages only. Admin routes do not render .public-site, so they keep the root colors. */
 body:has(.public-site) {
   --pink: var(--pink-100);
@@ -2751,4 +2772,3 @@ label {
     gap: 0.85rem;
   }
 }
-

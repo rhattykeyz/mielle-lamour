@@ -4,21 +4,19 @@
  *  - skips clips that fail to load; shows `fallback` if motion is reduced or all clips fail
  *  - optional `poster` image shows while the first clip loads
  *  - pauses when the browser tab is hidden
- * Clips live in /public/hero/ (manicure.mp4, pedicure.mp4, care.mp4, finish.mp4).
+ * Clips live in /public/hero/ (manicure.mp4, care.mp4, finish.mp4).
  * Styling: src/styles/site-redesign.css -> "1. HOME HERO"
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 export const heroFilms = {
   manicure: "/hero/manicure.mp4",
-  pedicure: "/hero/pedicure.mp4",
   care: "/hero/care.mp4",
   finish: "/hero/finish.mp4",
 } as const;
 
 export const homeReel = [
   heroFilms.manicure,
-  heroFilms.pedicure,
   heroFilms.care,
   heroFilms.finish,
 ];
