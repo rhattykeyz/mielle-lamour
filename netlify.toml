@@ -2,6 +2,9 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "22"
+
 # SPA fallback. Existing files (including prerendered route shells) win
 # unless a rule is forced, so /admin/login and other client routes return
 # index.html with 200 instead of Netlify's 404 page.
