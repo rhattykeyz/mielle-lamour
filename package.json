@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Mielle L'Amour — nail, beauty and spa website with booking and admin",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/prerender-meta.mjs",
