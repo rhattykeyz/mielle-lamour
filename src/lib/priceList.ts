@@ -52,6 +52,8 @@ const nailRows: MenuRow[] = [
 ];
 
 const footRows: MenuRow[] = [
+  { name: "Male Pedicure", slug: "male-pedicure", duration: 60, basic: 230, vip: null },
+  { name: "VIP Pedi", slug: "vip-pedi", duration: 75, basic: null, vip: 700 },
   { name: "Classic Pedi", slug: "classic-pedi", duration: 60, basic: 200, vip: 400 },
   { name: "VIP Classic Pedi", slug: "vip-classic-pedi", duration: 75, basic: 380, vip: 760 },
   { name: "Gel Mani/Pedi Comb", slug: "gel-mani-pedi-comb", duration: 120, basic: 380, vip: 760 },
@@ -68,7 +70,7 @@ const footRows: MenuRow[] = [
 ];
 
 const massageRows: MenuRow[] = [
-  { name: "Massage", slug: "massage", duration: 60, basic: null, vip: 990 },
+  { name: "Massage", slug: "massage", duration: 60, basic: null, vip: 1950 },
 ];
 
 export const localCategories: ServiceCategory[] = [
