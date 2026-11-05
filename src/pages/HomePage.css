@@ -286,8 +286,21 @@
   margin: 0 auto 2rem;
 }
 
+.home-page .section-head-row.home-testimonials-header {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-page .section-head-row.home-testimonials-header > div {
+  width: 100%;
+  text-align: center;
+}
+
 .home-gallery-header,
 .home-featured-header {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

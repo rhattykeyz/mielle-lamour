@@ -140,7 +140,7 @@ export function HomePage() {
           real client reviews, or replace them.
           =================================================================== */}
       <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
-        <div className="section-head-row">
+        <div className="section-head-row home-testimonials-header">
           <div>
             <p className="home-script">client love</p>
             <h2 className="mt-2 font-serif text-4xl sm:text-5xl">Testimonials</h2>
