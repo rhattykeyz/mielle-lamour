@@ -286,6 +286,26 @@
   margin: 0 auto 2rem;
 }
 
+.home-gallery-header,
+.home-featured-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.home-gallery-header h2,
+.home-featured-header h2 {
+  margin-inline: auto;
+}
+
+.home-featured-header .gold-link,
+.home-gallery-header .gold-link {
+  margin-inline: auto;
+}
+
 .home-page .section-head-row h2,
 .home-page .faq-header h2 {
   margin-top: 0.5rem;

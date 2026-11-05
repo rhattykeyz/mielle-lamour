@@ -115,7 +115,7 @@ export function HomePage() {
             </div>
           </Reveal>
         </div>
-        <p className="home-script mt-10">treatments</p>
+        <p className="home-script mt-10">Our services</p>
         <div className={`mx-auto mt-4 grid max-w-5xl gap-6 justify-center ${gridCols(categories?.length ?? 0)}`}>
           {(categories ?? []).map((c, i) => (
             <Reveal key={c.id} className="h-full" delay={Math.min(i, 4) * 80}>
@@ -190,7 +190,7 @@ export function HomePage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <p className="home-script">for you</p>
-            <div className="mt-2 flex items-end justify-between gap-4">
+            <div className="home-featured-header mt-2">
               <h2 className="font-serif text-4xl">Featured services</h2>
               <Link to="/services" className="gold-link text-sm text-ink">
                 <span>All services</span>
@@ -304,7 +304,7 @@ function NailCarousel() {
     <section className="band-blush py-16" aria-roledescription="carousel" aria-label="Nail sets">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
-          <div className="flex items-end justify-between gap-4">
+          <div className="home-gallery-header">
             <div>
               <p className="home-script">nail sets</p>
               <h2 className="mt-2 font-serif text-4xl">Gallery</h2>
