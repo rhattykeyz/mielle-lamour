@@ -27,14 +27,6 @@ type MenuRow = {
 
 const nailRows: MenuRow[] = [
   {
-    name: "Gel Removal with Serv.",
-    slug: "gel-removal-with-serv",
-    duration: 20,
-    description: "When booked with a new set.",
-    basic: 25,
-    vip: 50,
-  },
-  {
     name: "Gel Removal",
     slug: "gel-removal",
     duration: 30,
